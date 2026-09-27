@@ -1,0 +1,36 @@
+{% if breadcrumb_collection == blank and product.collections.size > 0 %}
+  {% assign breadcrumb_collection = product.collections.first %}
+{% endif %}
+
+<nav class="scentsium-breadcrumbs" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a>
+
+  {% if breadcrumb_collection %}
+    <span aria-hidden="true">›</span>
+    <a href="{{ breadcrumb_collection.url }}">
+      {{ breadcrumb_collection.title | escape }}
+    </a>
+  {% endif %}
+
+  <span aria-hidden="true">›</span>
+  <span aria-current="page">{{ product.title | escape }}</span>
+</nav>
+{% style %}
+  .scentsium-breadcrumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 0 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .scentsium-breadcrumbs a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .scentsium-breadcrumbs a:hover { opacity: 0.7; }
+{% endstyle %}</p>
